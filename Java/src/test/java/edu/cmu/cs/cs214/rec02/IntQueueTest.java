@@ -33,8 +33,8 @@ public class IntQueueTest {
     @Before
     public void setUp() {
         // comment/uncomment these lines to test each class
-        mQueue = new LinkedIntQueue();
-//        mQueue = new ArrayIntQueue();
+//        mQueue = new LinkedIntQueue();
+        mQueue = new ArrayIntQueue();
 
         testList = new ArrayList<>(List.of(1, 2, 3));
     }
@@ -72,6 +72,11 @@ public class IntQueueTest {
     }
 
     @Test
+    public void testDequeueEmptyQueue() {
+        assertNull(mQueue.dequeue());
+    }
+
+    @Test
     public void testDequeue() {
         testList.forEach(n -> mQueue.enqueue(n));
         for (int i = 0; i < testList.size(); i++) {
@@ -100,5 +105,40 @@ public class IntQueueTest {
         }
     }
 
+    @Test
+    public void testClear() {
+        for (int i = 0; i < testList.size(); i++) {
+            mQueue.enqueue(testList.get(i));
+        }
+        mQueue.clear();
+        assertEquals(mQueue.size(), 0);
+    }
 
+    @Test
+    public void testEnsureCapacity() {
+        for (int i = 0; i < 11; i++) {
+            mQueue.enqueue(i);
+        }
+        for (Integer i = 0; i < 11; i++) {
+            assertEquals(mQueue.dequeue(), i);
+        }
+        
+    }
+
+    @Test
+    public void testEnsureCapacityWithDequeue() {
+        for (int i = 0; i < 10; i++) {
+            mQueue.enqueue(i);
+        }
+        mQueue.dequeue();
+        mQueue.dequeue();
+        mQueue.enqueue(10);
+        mQueue.enqueue(11);
+        mQueue.enqueue(12);
+        for (Integer i = 2; i < 13; i++) {
+            assertEquals(mQueue.dequeue(), i);
+        }
+        
+    }
 }
+    

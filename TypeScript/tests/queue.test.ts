@@ -53,3 +53,50 @@ describe("test size: ", ()=> {
         expect(queue.size()).toBe(11)
     })
 })
+
+/*
+// Ziying:
+test("test clear: newly created list should be empty after clear", () => {
+    const queue = createQueue()
+    queue.clear()
+    expect(queue.isEmpty()).toBeTruthy()
+})
+
+test("test clear: list with 1 element should be empty after clear", () => {
+    const queue = createQueue()
+    queue.clear()
+    expect(queue.isEmpty()).toBeTruthy()
+})
+
+test("test dequeue: newly created list should dequeue null", () => {
+    expect(createQueue().dequeue()).toBeNull()
+})
+
+let num = [5, 10, 1000000]
+// parameterized test, apply to each value of the parameter
+test.each(num)("test dequeue: dequeued number %d is correct", (nr) => {
+    const queue = createQueue()
+    queue.enqueue(nr)
+    expect(queue.dequeue()).toBe(nr)
+})
+*/
+test('test clear: Remove all the elements from the queue.', () => {
+    const queue = createQueue()
+    queue.enqueue(2)
+    queue.enqueue(3)
+    expect(queue.size()).toBe(2)
+    queue.clear()
+    expect(queue.size()).toBe(0)
+  })
+  
+  test('test dequeue: Fetch and remove the element at the head of the queue.', () => {
+    const queue = createQueue()
+    queue.enqueue(2)
+    queue.enqueue(3)
+    expect(queue.dequeue()).toBe(3)
+  })
+  
+  test('test dequeue empty: return null', () => {
+    const queue = createQueue()
+    expect(queue.dequeue()).toBe(null)
+  })
